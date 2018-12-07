@@ -111,15 +111,13 @@ function onChangePasswordValue() {
 ko.applyBindings( _signInViewModel );
 
 // Auth0
-var config = JSON.parse(
-    decodeURIComponent(escape(window.atob('@@config@@')))
-);
+
 var params = Object.assign({
-    domain: config.auth0Domain,
-    clientID: config.clientID,
-    redirectUri: config.callbackURL,
+    domain: 'nani.eu.auth0.com',
+    clientID: 'DGq0t6mLXz2mIAAKR1GvQHTYybwnaA6X',
+    redirectUri: 'http://localhost:3000/callback',
     responseType: 'code'
-}, config.internalOptions);
+});
 
 var webAuth = new auth0.WebAuth(params);
 var databaseConnection = 'Username-Password-Authentication';
