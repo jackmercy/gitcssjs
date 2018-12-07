@@ -1,7 +1,7 @@
 'use strict';
 
 // Auth0
-/* var config = JSON.parse(
+var config = JSON.parse(
     decodeURIComponent(escape(window.atob('@@config@@')))
 );
 var params = Object.assign({
@@ -12,7 +12,7 @@ var params = Object.assign({
 }, config.internalOptions);
 
 var webAuth = new auth0.WebAuth(params);
-var databaseConnection = 'Username-Password-Authentication'; */
+var databaseConnection = 'Username-Password-Authentication';
 // Login form
 var loginBtn = document.getElementById('login-button');
 
@@ -130,13 +130,13 @@ function signInClicked(e) {
     var email = _signInViewModel.emailInput();
     var password = _signInViewModel.passwordInput();
     alert(`${email}`);
-    /* webAuth.redirect.loginWithCredentials({
+    webAuth.redirect.loginWithCredentials({
         connection: databaseConnection,
         username: email,
         password: password
     }, function(err) {
         if (err) displayError(err);
-    }); */
+    });
 }
 
 /*function forgotPassword(e) {
@@ -152,14 +152,6 @@ function signInClicked(e) {
         displaySuccess(resp);
     }
     });
-}
-
- function displayError(err) {
-    var errorMessage = document.getElementById('error-message');
-    errorMessage.innerHTML = err.description.toUpperCase();
-    errorMessage.style.display = 'block';
-
-    $('#success-message').hide();
 }
 
 function displaySuccess(message) {
@@ -179,6 +171,11 @@ $('.auth0-lock-back-button').click(function () {
     $('#login-form').show();
     $('#forgot-password-form').hide();
 }); */
+
+
+function displayError(err) {
+    notificationErr.innerHTML = err.description;
+}
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
 /* document.getElementById('btn-forgot-password').addEventListener('click', forgotPassword); */
