@@ -1,0 +1,140 @@
+.control {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+.control > .form-control:focus {
+    border-color: #a0a0a0;
+}
+.page-content {
+    display: table;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    right: 0;
+    z-index: 1000000;
+}
+
+.content-center {
+   /*  display: table-cell;
+    vertical-align: middle; */
+    display: block;
+    margin-top: 64px;
+}
+
+.sign-in-container {
+    width: 320px;
+    /* height: 610px; */
+    margin: auto;
+    /* border-radius: 1px; */
+}
+/* Header */
+.sign-in-header {
+    height: 140px;
+    background: rgb(255, 255, 255);
+}
+.greeting-text {
+    width: 320px;
+    height: 75px;
+    text-transform: uppercase;
+}
+.notification {
+    height: 60px;
+    margin-bottom: 5px;
+}
+.notify-text {
+    text-align: left;
+}
+.notification > .notify-text {
+    padding: 0 8px;
+}
+/* Header */
+
+
+/* Form */
+.form-sign-in {
+    background-color: white;
+}
+    /* Main method session */
+    .bec-form-control  {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    /* Main method session */
+
+    /* Forgot password session */
+    .forgot-password-session {
+        margin: 0px 0;
+    }
+    .forgot-password {
+        width: 100%;
+    }
+
+/* Form */
+
+/* Sign in button */
+.sign-in-button {
+    width: 320px;
+    height: 40px;
+    margin-bottom: 32px;
+    margin-top: 12px;
+}
+
+/* Material style */
+.log-in-button {
+    height: inherit;
+    width: 304px !important;
+    margin: 0 8px !important;
+}
+  
+  /* Ripple animation */
+  /* .log-in-button{
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .log-in-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, .5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 1;
+    }
+    20% {
+      transform: scale(40, 40);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(100, 100);
+    }
+  }
+  
+  .log-in-button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  } */
+  /* Ripple animation */
+  
+/* Sign in button */
+
+.show-error > .mdl-textfield__error {
+    visibility: visible;
+}
+
+.visibility-overide {
+    visibility: visible !important;
+}
+

@@ -1,0 +1,354 @@
+input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+.btn:focus,
+.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.full-width-button {
+    width: 100%;
+}
+.full-width-input {
+    width: 100% !important;
+}
+/* Text */
+.text-h1 {
+    line-height: 42px;
+    font-size: 32px;
+    font-weight: 400;
+    color: #8297ae; /*brand-secondary-light*/
+}
+.text-h2 {
+    line-height: 52px;
+    font-size: 48px;
+    font-weight: 400;
+    color: #8f497c; /*brand-primary*/
+}
+.text-h3 {
+    line-height: 26px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #acacac; /*gray*/
+}
+.text-h4 {
+    line-height: 42px;
+    font-size: 36px;
+    font-weight: 400;
+    color: #6e6e6e; /*gray-dark*/
+}
+.text-h5 {
+    line-height: 26px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #6e6e6e; /*gray-dark*/
+}
+
+.text-base {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 26px;
+}
+.text-small {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17px;
+}
+.text-center {
+    text-align: center !important;
+}
+/* Color */
+
+.color-black {
+    color: #000000;
+}
+
+.color-gray-dark{
+    color: #6e6e6e;
+}
+.color-gray {
+    color: #acacac;
+}
+
+.color-gray-light	{
+    color: #d2d2d2;
+}
+
+.color-gray-lighter {
+    color: #f3f3f3;
+}
+
+.color-white {
+    color: #ffffff;
+}
+
+.color-brand-secondary {
+    color: #3c5064;
+}
+.color-brand-secondary-light	{
+    color: #8297ae;
+}
+.color-brand-secondary-lighter {
+    color: #c5cfdc;
+}
+.color-brand-secondary-ultralight	{
+    color: #e3e8ee;
+}
+.color-brand-primary	{
+    color: #8f497c;
+}
+.color-brand-primary-light {
+    color: #d291b9;
+}
+.color-brand-primary-lighter	{
+    color: #e4bdd5;
+}
+.color-brand-primary-ultralight	{
+    color: #fcdee3;
+}
+.color-brand-danger-dark	{
+    color: #700918;
+}
+.color-brand-danger	{
+    color: #b1162e;
+}
+.color-brand-danger-light	{
+    color: #e66578;
+}
+.color-brand-danger-ultralight {
+    color: #fcdee3
+}
+.color-brand-success-dark	{
+    color: #53732d;
+}
+.color-brand-success	{
+    color: #729842;
+}
+.color-brand-success-light	{
+    color: #c5d864;
+}
+.color-brand-success-ultralight {
+    color: #f6fcd7;
+}
+
+/*-----Bg-----*/
+.bg-black {
+    color: #000000;
+}
+
+.bg-gray-dark{
+    color: #6e6e6e;
+}
+.bg-gray {
+    color: #acacac;
+}
+
+.bg-gray-light	{
+    color: #d2d2d2;
+}
+
+.bg-gray-lighter {
+    color: #f3f3f3;
+}
+
+.bg-white {
+    color: #ffffff;
+}
+
+.bg-brand-secondary {
+    color: #3c5064;
+}
+.bg-brand-secondary-light	{
+    color: #8297ae;
+}
+.bg-brand-secondary-lighter {
+    color: #c5cfdc;
+}
+.bg-brand-secondary-ultralight	{
+    color: #e3e8ee;
+}
+.bg-brand-primary	{
+    color: #8f497c;
+}
+.bg-brand-primary-light {
+    color: #d291b9;
+}
+.bg-brand-primary-lighter	{
+    color: #e4bdd5;
+}
+.bg-brand-primary-ultralight	{
+    color: #fcdee3;
+}
+.bg-brand-danger-dark	{
+    color: #700918;
+}
+.bg-brand-danger	{
+    color: #b1162e;
+}
+.bg-brand-danger-light	{
+    color: #e66578;
+}
+.bg-brand-danger-ultralight {
+    color: #fcdee3
+}
+.bg-brand-success-dark	{
+    color: #53732d;
+}
+.bg-brand-success	{
+    color: #729842;
+}
+.bg-brand-success-light	{
+    color: #c5d864;
+}
+.bg-brand-success-ultralight {
+    color: #f6fcd7;
+}
+
+/* Button */
+.btn-colored-brand-primary-style {
+    cursor: pointer;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #f3f3f3;
+    border-radius: 1px !important;
+    background-color: #8f497c;
+    border: none;
+    height: 45px;
+}
+.btn-colored-brand-primary-style:disabled {
+    background-color: #ACACAC;
+}
+
+/* Input */
+.input-label {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Link */
+.bec-link-text {
+    text-decoration: none;
+    color: #8f497c;
+}
+.bec-link-text:hover {
+    text-decoration: underline;
+    color: #d291b9;
+}
+
+
+/* Icons */
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-56 { font-size: 56px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-red { color: rgba(234, 83, 35, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+.material-icons.md-center {
+    text-align: center;
+    width: 100%;
+}
+/* Icons */
+
+/* Flat colored button */
+.bec-flat-colored-button > .mdl-button {
+    background-color: #8f497c;
+    color: #f3f3f3;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 1px;
+    border: none;
+    height: 45px;
+}
+.bec-flat-colored-button > .mdl-button:hover {
+    background-color: #d291b9; 
+}
+.bec-flat-colored-button > .mdl-button:focus:not(:active) {
+    background-color: rgba(0,0,0, 0.12); 
+}
+.bec-flat-colored-button > .mdl-button:active {
+  /*   background-color: rgba(158,158,158, 0.40); */ 
+  background-color: #8f497c;
+}
+
+.bec-flat-colored-button > .mdl-button:disabled {
+    background-color: #ACACAC !important;
+    color: #f3f3f3 !important;
+}
+
+/* INPUT */
+.bec-form-control > .mdl-textfield--floating-label .mdl-textfield__input { /*input text color*/
+    color: #6e6e6e;
+}
+/*------Default text field*/
+.bec-form-control > .mdl-textfield--floating-label .mdl-textfield__input {
+    border-bottom: 1px solid #6e6e6e; /*gray-dark*/
+}
+.bec-form-control > .mdl-textfield--floating-label.is-upgraded .mdl-textfield__label {
+    color: #6e6e6e; /*gray-dark*/
+}
+
+/*------Focused text field*/
+.bec-form-control > .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.bec-form-control > .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.bec-form-control > .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    color: #8f497c;
+    font-size: 12px;
+    top: 4px;
+    visibility: visible; 
+}
+
+.mdl-textfield__label:after {
+    background-color: #8f497c !important;
+}
+
+.bec-form-control > .mdl-textfield--floating-label.is-focused .mdl-textfield__input,
+.bec-form-control > .mdl-textfield--floating-label.is-dirty .mdl-textfield__input {
+    border-bottom: 1px solid #8f497c;
+}
+
+/*------Success text field*/
+
+.bec-form-control > .mdl-textfield--floating-label.success .mdl-textfield__label,
+.bec-form-control > .mdl-textfield--floating-label.success .mdl-textfield__error {
+    color: #729842;
+}
+
+.bec-form-control > .mdl-textfield.success .mdl-textfield__label:after {
+    background-color: #729842 !important;
+}
+
+.bec-form-control > .mdl-textfield--floating-label.success .mdl-textfield__input {
+    border-bottom: 1px solid #729842; /*brand-danger*/
+}
+
+/*------Error text field*/
+.bec-form-control > .mdl-textfield--floating-label.error .mdl-textfield__label,
+.bec-form-control > .mdl-textfield--floating-label.error .mdl-textfield__error {
+    color: #b1162e;
+}
+
+.bec-form-control > .mdl-textfield.is-invalid .mdl-textfield__label:after,
+.bec-form-control > .mdl-textfield.error .mdl-textfield__label:after {
+    background-color: #b1162e !important; 
+}
+
+.bec-form-control > .mdl-textfield--floating-label.error .mdl-textfield__input {
+    border-bottom: 1px solid #b1162e; /*brand-danger*/
+}
+
+.bec-form-control > .mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
+    color: #b1162e;
+    font-size: 12px; 
+}
