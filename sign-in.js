@@ -1,18 +1,5 @@
 'use strict';
 
-// Auth0
-var config = JSON.parse(
-    decodeURIComponent(escape(window.atob('@@config@@')))
-);
-var params = Object.assign({
-    domain: config.auth0Domain,
-    clientID: config.clientID,
-    redirectUri: config.callbackURL,
-    responseType: 'code'
-}, config.internalOptions);
-
-var webAuth = new auth0.WebAuth(params);
-var databaseConnection = 'Username-Password-Authentication';
 // Login form
 var loginBtn = document.getElementById('login-button');
 
@@ -122,6 +109,20 @@ function onChangePasswordValue() {
 }
 
 ko.applyBindings( _signInViewModel );
+
+// Auth0
+var config = JSON.parse(
+    decodeURIComponent(escape(window.atob('@@config@@')))
+);
+var params = Object.assign({
+    domain: config.auth0Domain,
+    clientID: config.clientID,
+    redirectUri: config.callbackURL,
+    responseType: 'code'
+}, config.internalOptions);
+
+var webAuth = new auth0.WebAuth(params);
+var databaseConnection = 'Username-Password-Authentication';
 
 // login logic
 
