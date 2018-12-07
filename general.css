@@ -45,6 +45,13 @@ button:focus,
     color: #6e6e6e; /*gray-dark*/
 }
 
+.base-font {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 26px;
+    color: #6e6e6e; /*gray-dark*/
+}
+
 .text-base {
     font-size: 18px;
     font-weight: 300;
@@ -270,6 +277,7 @@ button:focus,
     border-radius: 1px;
     border: none;
     height: 45px;
+    text-transform: uppercase;
 }
 .bec-flat-colored-button > .mdl-button:hover {
     background-color: #d291b9; 
