@@ -10,6 +10,8 @@ var _passwordInput = document.getElementById('password');
 var passwordErrorText = document.getElementById('password-err-text');
 
 var headerText = document.getElementById('header-text');
+
+var notificationMessage = document.getElementById('notification-message');
 var notificationErr = document.getElementById('notification-error');
 var notificationSuccess = document.getElementById('notification-success');
 
@@ -46,10 +48,7 @@ function validatePassword(pwd) {
 }
 // Validator
 
-var errorTexts = {
-    INVALID_EMAIL: 'Invalid Email address',
-    PASSWORD_LENGTH: 'Password must be at least 8 characters',
-}
+
 
 var _signInViewModel = {
     // Email
@@ -75,7 +74,7 @@ function onChangeEmailValue(input, showMandatoryErrMessage, isValidated, errElem
     } else if (!validateEmail(input())) {
         showMandatoryErrMessage(false);
         isValidated(false);
-        emailErrorText.innerHTML = errorTexts.INVALID_EMAIL;
+        emailErrorText.innerHTML = pageTexts.INVALID_EMAIL;
     } else if (validateEmail(input())) {
         emailErrorText.innerHTML = '';
         showMandatoryErrMessage(false);
@@ -115,7 +114,7 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     } else if(input().length > 0 && input().length < 8) {
         showMandatoryErrMessage(false);
         isValidated(false);
-        passwordErrorText.innerHTML = errorTexts.PASSWORD_LENGTH;
+        passwordErrorText.innerHTML = pageTexts.PASSWORD_LENGTH;
     } else {
         showMandatoryErrMessage(false);
         isValidated(true);
@@ -169,18 +168,31 @@ function forgotPassword(e) {
     }
 
 function displaySuccess(message) {
+    notificationMessage.innerHTML = '';
+    notificationErr.innerHTML = '';
     notificationSuccess.innerHTML = message;
 }
 
 function displayError(err) {
+    notificationMessage.innerHTML = '';
+    notificationSuccess.innerHTML = '';
     notificationErr.innerHTML = err.description;
 }
 
 function onForgotPasswordLinkClicked() {
     signInContainer.style.display = 'none';
     forgotPasswordContainer.style.display = 'block';
-    headerText.innerHTML = 'forgot password';
+    headerText.innerHTML = pageTexts.FORGOT_HEADER;
+    notificationMessage.innerHTML = pageTexts.FORGOT_NOTIFICATION_INTRO;
 }
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
 document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
+
+
+var pageTexts = {
+    INVALID_EMAIL: 'Invalid Email address',
+    PASSWORD_LENGTH: 'Password must be at least 8 characters',
+    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
+    FORGOT_HEADER: 'forgot password'
+}
