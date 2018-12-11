@@ -81,7 +81,7 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
-    globalError = changePassword.globalError ? changePassword.globalError : '';
+    globalError = ko.observable('');
 };
 
 function onSubmitClick() {
@@ -95,7 +95,7 @@ function onSubmitClick() {
         console.log(data);
         changePassword.request(data);
         setTimeout(function () {
-            globalError = changePassword.globalError;
+            globalError(changePassword.globalError);
         }, 6001);
     }
 }
