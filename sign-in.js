@@ -189,6 +189,9 @@ function onForgotPasswordLinkClicked() {
     notificationMessage.innerHTML = pageTexts.FORGOT_NOTIFICATION_INTRO;
     notificationSuccess.innerHTML = '';
     notificationErr.innerHTML = '';
+    _signInViewModel.emailInput('');
+    _signInViewModel.passwordInput('');
+    headerText.innerHTML = pageTexts.SIGNIN_HEADER;
 }
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
@@ -199,5 +202,6 @@ var pageTexts = {
     INVALID_EMAIL: 'Invalid Email address',
     PASSWORD_LENGTH: 'Password must be at least 8 characters',
     FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
-    FORGOT_HEADER: 'forgot password'
+    FORGOT_HEADER: 'forgot password',
+    SIGNIN_HEADER: 'SIGN IN'
 }
