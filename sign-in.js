@@ -166,6 +166,7 @@ function forgotPassword(e) {
             forgotPasswordContainer.style.display = 'none';
             signInContainer.style.display = 'block';
             displaySuccess(resp);
+            headerText.innerHTML = pageTexts.SIGNIN_HEADER;
         }
         });
     }
@@ -189,9 +190,6 @@ function onForgotPasswordLinkClicked() {
     notificationMessage.innerHTML = pageTexts.FORGOT_NOTIFICATION_INTRO;
     notificationSuccess.innerHTML = '';
     notificationErr.innerHTML = '';
-    _signInViewModel.emailInput('');
-    _signInViewModel.passwordInput('');
-    headerText.innerHTML = pageTexts.SIGNIN_HEADER;
 }
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
@@ -205,3 +203,4 @@ var pageTexts = {
     FORGOT_HEADER: 'forgot password',
     SIGNIN_HEADER: 'SIGN IN'
 }
+
