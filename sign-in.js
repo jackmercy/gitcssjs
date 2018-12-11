@@ -4,13 +4,19 @@
 var loginBtn = document.getElementById('login-button');
 
 var _emailInput = document.getElementById('email');
-var emailErrorText = document.getElementById('email-err-text');
+
 
 var _passwordInput = document.getElementById('password');
 var passwordErrorText = document.getElementById('password-err-text');
 
+var headerText = document.getElementById('header-text');
 var notificationErr = document.getElementById('notification-error');
+var notificationSuccess = document.getElementById('notification-success');
 
+var signInContainer = document.getElementById('sign-in-container');
+var forgotPasswordContainer = document.getElementById('forgot-password-container');
+
+forgotPasswordContainer.style.display = 'none';
 
 // validator 8 chars: .{8,} expr: ^(?=[a-zA-Z0-9#@$?]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*
 function hasNumber(input) {
@@ -40,41 +46,50 @@ function validatePassword(pwd) {
 }
 // Validator
 
-// enable validation
+var errorTexts = {
+    INVALID_EMAIL: 'Invalid Email address',
+    PASSWORD_LENGTH: 'Password must be at least 8 characters',
+}
+
 var _signInViewModel = {
+    // Email
     emailInput: ko.observable(''),
-    passwordInput: ko.observable(''),
-
-    shouldShowEmailErrMessage: ko.observable(false),
-    shouldShowPasswordErrMessage: ko.observable(false),
-
+    showMandatoryEmailErrMessage: ko.observable(false),
     isEmailValidated: ko.observable(false),
+    // Password
+    passwordInput: ko.observable(''),
+    showMandatoryPasswordErrMessage: ko.observable(false),
     isPasswordValidated: ko.observable(false),
+    // Forgot email
+    forgotEmailInput: ko.observable(''),
+    showMandatoryForgotEmailErrMessage: ko.observable(false),
+    isForgotEmailValidated: ko.observable(false),
 };
 
-function onChangeEmailValue() {
-    if (_signInViewModel.emailInput().toString().length === 0) {
-        _signInViewModel.shouldShowEmailErrMessage(true);
-        _signInViewModel.isEmailValidated(false);
+function onChangeEmailValue(input, showMandatoryErrMessage, isValidated, errElement) {
+    var emailErrorText = document.getElementById(errElement);
+    if (input().length === 0) {
+        showMandatoryErrMessage(true);
+        isValidated(false);
         return;
-    } else if (!validateEmail(_signInViewModel.emailInput())) {
-        _signInViewModel.shouldShowEmailErrMessage(false);
-        _signInViewModel.isEmailValidated(false);
-        emailErrorText.innerHTML = 'Invalid Email address';
-    } else if (validateEmail(_signInViewModel.emailInput())) {
+    } else if (!validateEmail(input())) {
+        showMandatoryErrMessage(false);
+        isValidated(false);
+        emailErrorText.innerHTML = errorTexts.INVALID_EMAIL;
+    } else if (validateEmail(input())) {
         emailErrorText.innerHTML = '';
-        _signInViewModel.shouldShowEmailErrMessage(false);
-        _signInViewModel.isEmailValidated(true);
+        showMandatoryErrMessage(false);
+        isValidated(true);
     }
 }
 
 // strict password: upper & lower case + number
 /* function onChangePasswordValue() {
     if (_signInViewModel.passwordInput().length === 0) {
-        _signInViewModel.shouldShowPasswordErrMessage(true);
+        _signInViewModel.showMandatoryPasswordErrMessage(true);
         return;
     } else if(_signInViewModel.passwordInput().length > 0 && _signInViewModel.passwordInput().length < 8) {
-        _signInViewModel.shouldShowPasswordErrMessage(false);
+        _signInViewModel.showMandatoryPasswordErrMessage(false);
         _signInViewModel.isPasswordValidated(false);
         passwordErrorText.innerHTML = 'Password must be at least 8 characters';
 
@@ -82,29 +97,29 @@ function onChangeEmailValue() {
             !hasLetters(_signInViewModel.passwordInput())   ||
             !hasLowerCase(_signInViewModel.passwordInput()) ||
             !hasUpperCase(_signInViewModel.passwordInput())) {
-        _signInViewModel.shouldShowPasswordErrMessage(false);
+        _signInViewModel.showMandatoryPasswordErrMessage(false);
         _signInViewModel.isPasswordValidated(false);
         passwordErrorText.innerHTML = 'Must contains number, lowercase and uppercase letters';
     } else {
-        _signInViewModel.shouldShowPasswordErrMessage(false);
+        _signInViewModel.showMandatoryPasswordErrMessage(false);
         passwordErrorText.innerHTML = '';
         _signInViewModel.isPasswordValidated(true);
     }
 } */
 
 // simple: > 8 chars
-function onChangePasswordValue() {
-    if (_signInViewModel.passwordInput().length === 0) {
-        _signInViewModel.shouldShowPasswordErrMessage(true);
+function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
+    if (input().length === 0) {
+        showMandatoryErrMessage(true);
         return;
-    } else if(_signInViewModel.passwordInput().length > 0 && _signInViewModel.passwordInput().length < 8) {
-        _signInViewModel.shouldShowPasswordErrMessage(false);
-        _signInViewModel.isPasswordValidated(false);
-        passwordErrorText.innerHTML = 'Password must be at least 8 characters';
+    } else if(input().length > 0 && input().length < 8) {
+        showMandatoryErrMessage(false);
+        isValidated(false);
+        passwordErrorText.innerHTML = errorTexts.PASSWORD_LENGTH;
     } else {
-        _signInViewModel.shouldShowPasswordErrMessage(false);
+        showMandatoryErrMessage(false);
+        isValidated(true);
         passwordErrorText.innerHTML = '';
-        _signInViewModel.isPasswordValidated(true);
     }
 }
 
@@ -128,7 +143,7 @@ function signInClicked(e) {
     e.preventDefault();
     var email = _signInViewModel.emailInput();
     var password = _signInViewModel.passwordInput();
-    alert(`${email}`);
+
     webAuth.redirect.loginWithCredentials({
         connection: databaseConnection,
         username: email,
@@ -138,43 +153,34 @@ function signInClicked(e) {
     });
 }
 
-/*function forgotPassword(e) {
+function forgotPassword(e) {
     e.preventDefault();
-    var email = document.getElementById('email-forgot').value;
+    var _email = _signInViewModel.forgotEmailInput();
+
     webAuth.changePassword({
     connection: databaseConnection,
-    email: email
-}, function(err, resp) {
-    if (err) displayError(err);
-    else {
-        $('.auth0-lock-back-button').click();
-        displaySuccess(resp);
+    email: _email
+    }, function(err, resp) {
+        if (err) displayError(err);
+        else {
+            displaySuccess(resp);
+        }
+        });
     }
-    });
-}
 
 function displaySuccess(message) {
-    var successMessage = document.getElementById('success-message');
-    successMessage.innerHTML = message;
-    successMessage.style.display = 'block';
-
-    $('#error-message').hide();
-} */
-
-/* $('.auth0-lock-alternative-link').click(function () {
-    $('#login-form').hide();
-    $('#forgot-password-form').show();
-});
-
-$('.auth0-lock-back-button').click(function () {
-    $('#login-form').show();
-    $('#forgot-password-form').hide();
-}); */
-
+    notificationSuccess.innerHTML = message;
+}
 
 function displayError(err) {
     notificationErr.innerHTML = err.description;
 }
 
+function onForgotPasswordLinkClicked() {
+    signInContainer.style.display = 'none';
+    forgotPasswordContainer.style.display = 'block';
+    headerText.innerHTML = 'forgot password';
+}
+
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
-/* document.getElementById('btn-forgot-password').addEventListener('click', forgotPassword); */
+document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
