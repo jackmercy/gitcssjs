@@ -86,8 +86,8 @@ function onSubmitClick() {
         });
 
         var data = {
-            newPassword: currentPasswordInput,
-            confirmNewPassword: confirmPasswordInput,
+            newPassword: passwordInput(),
+            confirmNewPassword: confirmPasswordInput(),
             _csrf: changePassword.csrf_token,
             ticket: changePassword.ticket
         };
