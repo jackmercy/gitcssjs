@@ -237,13 +237,27 @@ button:focus,
 .bec-link-text {
     text-decoration: none;
     color: #8f497c;
+    cursor: pointer;
 }
+
 .bec-link-text:hover {
     text-decoration: underline;
     color: #d291b9;
 }
 
-
+.bec-link-small {
+    text-decoration: underline;
+    color: #8f497c;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.bec-link-small:hover {
+    text-decoration: underline;
+    color: #d291b9;
+    font-size: 14px;
+    font-weight: 300;
+}
 /* Icons */
 
 /* Rules for sizing the icon. */
