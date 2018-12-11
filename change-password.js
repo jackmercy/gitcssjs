@@ -49,6 +49,7 @@ var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD;
 var globalError;
+var globalMessage;
 
 document.getElementById("change-password-widget-container").style.display= "none";
 
@@ -69,6 +70,7 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
+    globalError = ko.observable(changePassword);
 
 };
 
