@@ -1,5 +1,5 @@
 'use strict';
-const Auth0ChangePassword = window.Auth0ChangePassword;
+
 var changePasswordBtn = document.getElementById('change-password-button');
 
 var _currentPasswordInput = document.getElementById('current-password');
