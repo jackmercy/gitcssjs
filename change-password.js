@@ -55,7 +55,7 @@ var changePassword = new Auth0ChangePassword({
     csrf_token:        "{{csrf_token}}",                                  // DO NOT CHANGE THIS
     ticket:            "{{ticket}}",                                      // DO NOT CHANGE THIS
     password_policy:   "",                             // DO NOT CHANGE THIS
-    password_complexity_options:  {{password_complexity_options}},        // DO NOT CHANGE THIS
+    password_complexity_options:  "{{password_complexity_options}}",        // DO NOT CHANGE THIS
 theme: {
     icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
         primaryColor: "#ea5323"
