@@ -49,6 +49,8 @@ var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD;
 
+document.getElementById("change-password-widget-container").style.display= "none";
+
 function changePasswordViewModel() {
     CHANGE_PASSWORD = {
         TITLE: 'Change password',
@@ -66,20 +68,32 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
-/*    canSubmit = ko.pureComputed(function () {
-            console.log('called');
-            return (
-                this.passwordInput().length > 0 &&
-                this.currentPasswordInput().length > 0 &&
-                this.confirmPasswordInput().length > 0
-            )}, this);*/
 };
 
 function onSubmitClick() {
-    console.log(currentPasswordInput());
-    console.log(passwordInput());
-    console.log(confirmPasswordInput());
+    if (isFormValidated() && currentPasswordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
+        var changePassword = new Auth0ChangePassword({
+            container:         "change-password-widget-container",                // required
+            email:             "{{email | escape}}",                              // DO NOT CHANGE THIS
+            csrf_token:        "{{csrf_token}}",                                  // DO NOT CHANGE THIS
+            ticket:            "{{ticket}}",                                      // DO NOT CHANGE THIS
+            password_policy:   "{{password_policy}}",                             // DO NOT CHANGE THIS
+            password_complexity_options:  {{password_complexity_options}},        // DO NOT CHANGE THIS
+        theme: {
+            icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
+                primaryColor: "#ea5323"
+        }
+    });
 
+        var data = {
+            newPassword: currentPasswordInput,
+            confirmNewPassword: confirmPasswordInput,
+            _csrf: changePassword.csrf_token,
+            ticket: changePassword.ticket
+        };
+        console.log(data);
+        changePassword.request(data);
+    }
 }
 
 function onChangePasswordValue(input, isError, errorText) {
