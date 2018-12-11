@@ -71,7 +71,7 @@ function changePasswordViewModel() {
 };
 
 function onSubmitClick() {
-    if (isFormValidated() && currentPasswordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
+    if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
         var changePassword = new Auth0ChangePassword({
             container:         "change-password-widget-container",                // required
             email:             "{{email | escape}}",                              // DO NOT CHANGE THIS
