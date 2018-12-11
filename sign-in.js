@@ -163,6 +163,7 @@ function forgotPassword(e) {
         if (err) displayError(err);
         else {
             displaySuccess(resp);
+            // back to home
         }
         });
     }
@@ -184,6 +185,8 @@ function onForgotPasswordLinkClicked() {
     forgotPasswordContainer.style.display = 'block';
     headerText.innerHTML = pageTexts.FORGOT_HEADER;
     notificationMessage.innerHTML = pageTexts.FORGOT_NOTIFICATION_INTRO;
+    notificationSuccess.innerHTML = '';
+    notificationErr.innerHTML = '';
 }
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
