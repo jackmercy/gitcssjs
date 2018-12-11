@@ -162,8 +162,10 @@ function forgotPassword(e) {
     }, function(err, resp) {
         if (err) displayError(err);
         else {
+            // back to sign in page
+            forgotPasswordContainer.style.display = 'none';
+            signInContainer.style.display = 'block';
             displaySuccess(resp);
-            // back to home
         }
         });
     }
