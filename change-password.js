@@ -69,7 +69,7 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
-    globalError = ko.observable(changePassword);
+
 };
 
 function onSubmitClick() {
