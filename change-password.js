@@ -47,9 +47,18 @@ var isPasswordError;
 var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
-var canSubmit;
+var CHANGE_PASSWORD;
 
 function changePasswordViewModel() {
+    CHANGE_PASSWORD = {
+        TITLE: 'Change password',
+        CURRENT_PASSWORD: 'Current password',
+        NEW_PASSWORD: 'New password',
+        CONFIRM_PASSWORD: 'Re-enter new password',
+        LENGTH_8_ERROR: 'Password must be at least 8 characters',
+        PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match',
+        BUTTON_SUBMIT: 'Change password'
+    };
     currentPasswordInput = ko.observable('');
     isCurrentPasswordError = ko.observable(false);
     passwordInput = ko.observable('');
@@ -82,7 +91,7 @@ function onChangePasswordValue(input, isError, errorText) {
     } else if(input().length > 0 && input().length < 8) {
         isError(true);
         isFormValidated(false);
-        passwordErrorText.innerHTML = 'Password must be at least 8 characters';
+        passwordErrorText.innerHTML = CHANGE_PASSWORD.LENGTH_8_ERROR;
     } else {
         isError(false);
         passwordErrorText.innerHTML = '';
@@ -101,7 +110,7 @@ function doesPasswordMatch() {
     if (passwordInput() !== confirmPasswordInput() ) {
         isConfirmPasswordError(true);
         isFormValidated(false);
-        confirmPasswordError.innerHTML = 'Passwords do not match';
+        confirmPasswordError.innerHTML = CHANGE_PASSWORD.PASSWORD_NOT_MATCH_ERROR;
     } else {
         isConfirmPasswordError(false);
         isFormValidated(true);
