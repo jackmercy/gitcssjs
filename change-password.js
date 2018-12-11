@@ -48,6 +48,19 @@ var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD;
+var globalError;
+var changePassword = new Auth0ChangePassword({
+    container:         "change-password-widget-container",                // required
+    email:             "{{email | escape}}",                              // DO NOT CHANGE THIS
+    csrf_token:        "{{csrf_token}}",                                  // DO NOT CHANGE THIS
+    ticket:            "{{ticket}}",                                      // DO NOT CHANGE THIS
+    password_policy:   "{{password_policy}}",                             // DO NOT CHANGE THIS
+    password_complexity_options:  "{{password_complexity_options}}",        // DO NOT CHANGE THIS
+    theme: {
+        icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
+        primaryColor: "#ea5323"
+    }
+});
 
 document.getElementById("change-password-widget-container").style.display= "none";
 
@@ -68,23 +81,11 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
+    globalError = changePassword.globalError ? changePassword.globalError : '';
 };
 
 function onSubmitClick() {
     if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
-        var changePassword = new Auth0ChangePassword({
-            container:         "change-password-widget-container",                // required
-            email:             "{{email | escape}}",                              // DO NOT CHANGE THIS
-            csrf_token:        "{{csrf_token}}",                                  // DO NOT CHANGE THIS
-            ticket:            "{{ticket}}",                                      // DO NOT CHANGE THIS
-            password_policy:   "{{password_policy}}",                             // DO NOT CHANGE THIS
-            //password_complexity_options:  "{{password_complexity_options}}",        // DO NOT CHANGE THIS
-            theme: {
-                icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
-                primaryColor: "#ea5323"
-            }
-        });
-
         var data = {
             newPassword: passwordInput(),
             confirmNewPassword: confirmPasswordInput(),
