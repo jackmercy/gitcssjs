@@ -2,6 +2,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
+    background-color: #fff;
 }
 .control > .form-control:focus {
     border-color: #a0a0a0;
@@ -23,25 +24,31 @@
     margin-top: 64px;
 }
 
-.sign-in-container {
+.router-container {
     width: 320px;
     /* height: 610px; */
     margin: auto;
     /* border-radius: 1px; */
 }
+
 /* Header */
-.sign-in-header {
-    height: 140px;
-    background: rgb(255, 255, 255);
-}
 .greeting-text {
-    width: 320px;
+    margin: auto;
     height: 75px;
     text-transform: uppercase;
 }
-.notification {
+
+.sign-in-header {
     height: 60px;
+    background: rgb(255, 255, 255);
+}
+
+.notification {
+    height: 56px;
     margin-bottom: 5px;
+    display: table-cell;
+    vertical-align: bottom;
+    
 }
 .notify-text {
     text-align: left;
@@ -53,9 +60,6 @@
 
 
 /* Form */
-.form-sign-in {
-    background-color: white;
-}
     /* Main method session */
     .bec-form-control  {
         margin-left: 8px;
@@ -87,46 +91,6 @@
     width: 304px !important;
     margin: 0 8px !important;
 }
-  
-  /* Ripple animation */
-  /* .log-in-button{
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .log-in-button:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, .5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-  }
-  
-  @keyframes ripple {
-    0% {
-      transform: scale(0, 0);
-      opacity: 1;
-    }
-    20% {
-      transform: scale(40, 40);
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: scale(100, 100);
-    }
-  }
-  
-  .log-in-button:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-  } */
-  /* Ripple animation */
   
 /* Sign in button */
 
