@@ -83,7 +83,7 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        const formData = new FormData();
+        var formData = new FormData();
         Object.keys(data).forEach(function(key) {
            formData.append(key, data[key]);
             console.log(formData);
