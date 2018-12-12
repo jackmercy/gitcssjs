@@ -91,7 +91,7 @@ function onSubmitClick() {
             }
         };
         xhttp.open("POST", 'https://nani.eu.auth0.com/lo/reset' , true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(JSON.stringify(data));
     }
 }
