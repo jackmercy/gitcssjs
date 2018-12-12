@@ -25,7 +25,7 @@ var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
 var globalError;
-var isChangePassword = false;
+var isChangePassword;
 
 document.getElementById("change-password-widget-container").style.display= "none";
 
@@ -43,7 +43,7 @@ function changePasswordViewModel() {
     };
     RESET_PASSWORD = {
         TITLE: 'Reset password',
-        BUTTON: 'Change password',
+        BUTTON: 'Reset password',
         PAGE_TITLE: 'BEC Reset Password'
     };
 
@@ -55,6 +55,7 @@ function changePasswordViewModel() {
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
     globalError = ko.observable('');
+    isChangePassword = ko.observable(false);
 
 };
 
