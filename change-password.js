@@ -84,46 +84,62 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        var string = transformRequest(data);
-        console.log(string);
-
-
-        changePassword.request(data);
-        const header = new Headers();
-        header.append('Content-Type', 'application/x-www-form-urlencoded');
-/*        const request = new Request(
-            'https://nani.eu.auth0.com/lo/reset',
-            {
-                method: 'POST',
-                body: string,
-                headers: header
-            });*/
-
         request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).then(function (res) {
-            console.log(res);
+            handleSuccessfulRequest(res);
         }).catch(function (err, res) {
-            console.log();
-        })
-/*        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-            }
-        };
-        xhttp.open("POST", "https://nani.eu.auth0.com/lo/reset", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(string);
-
-        /!*        fetch(request).then(function (response) {
-                    console.log(response);
-                }).catch(function (error, response) {
-                    console.log(response);
-                    console.log(error);
-                });*!/*/
-
-
+            handleFailedRequest(err, res);
+        });
     }
 }
+
+function handleSuccessfulRequest(res) {
+    var shouldRedirect = res.body && typeof res.body.result_url === 'string';
+    this.auxiliaryPane = _react2.default.createElement(
+        _success_pane2.default,
+        null,
+        _react2.default.createElement(
+            'p',
+            null,
+            changePassword.t('successMessage')
+        )
+    );
+
+    changePassword.isSubmitting = false;
+
+    if (shouldRedirect) {
+        setTimeout(function () {
+            redirect(res.body.result_url);
+        }, changePassword.delayBeforeRedirect);
+    } else if (changePassword.successCallback) {
+        changePassword.successCallback();
+    }
+};
+
+function handleFailedRequest(err, res) {
+    res ? handleResponseError(res) : handleNetworkError(err);
+};
+
+function handleResponseError(res) {
+    var body = res.body;
+
+
+    if (!body || (typeof body === 'undefined' ? 'undefined' : _typeof(body)) !== 'object') {
+        body = {};
+    }
+
+    var passwordErrors = {
+        PasswordStrengthError: 'weakPasswordError',
+        PasswordHistoryError: 'passwordHistoryError',
+        PasswordDictionaryError: 'passwordDictError',
+        PasswordNoUserInfoError: 'passwordNoUserInfoError'
+    };
+
+    changePassword.globalError = changePassword.t(passwordErrors[body.name] || body.code || 'serverError');
+};
+
+function handleNetworkError(err) {
+    changePassword.globalError = changePassword.t(err.timeout ? 'timeoutError' : 'networkError');
+};
 
 function transformRequest(obj) {
     var str = [];
