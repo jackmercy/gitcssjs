@@ -1,5 +1,5 @@
 'use strict';
-var request = new superagent();
+var request = superagent;
 
 var changePasswordBtn = document.getElementById('change-password-button');
 
