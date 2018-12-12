@@ -70,7 +70,7 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
-    //globalError = ko.observable(changePassword);
+    globalError = ko.observable();
 
 };
 
@@ -84,7 +84,16 @@ function onSubmitClick() {
         };
         console.log(data);
         //changePassword.request(data);
-        const request = new Request();
+/*        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                globalError(changePassword.globalError);
+            }
+        };
+
+        xhttp.open("POST", , true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(JSON.stringify(data));*/
     }
 }
 
