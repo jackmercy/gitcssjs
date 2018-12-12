@@ -1,4 +1,5 @@
 'use strict';
+var request = superagent;
 
 var changePasswordBtn = document.getElementById('change-password-button');
 
@@ -98,12 +99,29 @@ function onSubmitClick() {
                 headers: header
             });
 
-        fetch(request).then(function (response) {
-            console.log(response);
-        }).catch(function (error, response) {
-            console.log(response);
-            console.log(error);
-        });
+        request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).then(function (res) {
+            console.log(res);
+        }).catch(function (err, res) {
+            console.log();
+        })
+/*        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("POST", "https://nani.eu.auth0.com/lo/reset", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(string);
+
+        /!*        fetch(request).then(function (response) {
+                    console.log(response);
+                }).catch(function (error, response) {
+                    console.log(response);
+                    console.log(error);
+                });*!/*/
+
+
     }
 }
 
