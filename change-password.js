@@ -83,7 +83,7 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
         console.log(data);
-        //changePassword.request(data);
+        changePassword.request(data);
 /*        var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
