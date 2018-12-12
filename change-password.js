@@ -87,10 +87,9 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).then(function (res) {
-            handleSuccessfulRequest(res);
-        }).catch(function (err, res) {
-            handleFailedRequest(err, res);
+        request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).timeout(6000).end(function (err, res) {
+            if (err) { handleFailedRequest(err, res) }
+            else { handleSuccessfulRequest(res) };
         });
     }
 }
