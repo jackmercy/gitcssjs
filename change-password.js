@@ -164,4 +164,4 @@ function doesPasswordMatch() {
     }
 }
 
-ko.applyBindings(new changePasswordViewModel() );
+ko.applyBindings(new changePasswordViewModel(), document.getElementById("html") );
