@@ -89,7 +89,7 @@ function onSubmitClick() {
         });
 
         console.log(formData);
-        //changePassword.request(data);
+        changePassword.request(data);
         const header = new Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
         const request = new Request(
