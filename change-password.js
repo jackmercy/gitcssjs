@@ -14,31 +14,6 @@ var confirmPasswordError = document.getElementById('confirm-password-err');
 
 var notification = document.getElementById('notification-text');
 
-
-// validator
-function hasNumber(input) {
-    return /\d/.test(input);
-}
-
-function hasLetters(input) {
-    return /[^0-9]/.test(input);
-}
-
-function hasLowerCase(str) {
-    return (/[a-z]/.test(str));
-}
-
-function hasUpperCase(str) {
-    return (/[A-Z]/.test(str));
-}
-
-function validateEmail(email) {
-    var expr = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    return expr.test(String(email).toLowerCase());
-}
-// Validator
-
-
 // enable validation
 
 var currentPasswordInput;
@@ -48,22 +23,30 @@ var isPasswordError;
 var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
-var CHANGE_PASSWORD;
+var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
 var globalError;
-var globalMessage;
+var isChangePassword = false;
 
 document.getElementById("change-password-widget-container").style.display= "none";
 
 function changePasswordViewModel() {
-    CHANGE_PASSWORD = {
-        TITLE: 'Change password',
-        CURRENT_PASSWORD: 'Current password',
+    GENERAL = {
         NEW_PASSWORD: 'New password',
         CONFIRM_PASSWORD: 'Re-enter new password',
         LENGTH_8_ERROR: 'Password must be at least 8 characters',
-        PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match',
-        BUTTON_SUBMIT: 'Change password'
+        PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match'
+    }
+    CHANGE_PASSWORD = {
+        TITLE: 'Change password',
+        BUTTON: 'Change password',
+        PAGE_TITLE: 'BEC Change Password'
     };
+    RESET_PASSWORD = {
+        TITLE: 'Reset password',
+        BUTTON: 'Change password',
+        PAGE_TITLE: 'BEC Reset Password'
+    };
+
     currentPasswordInput = ko.observable('');
     isCurrentPasswordError = ko.observable(false);
     passwordInput = ko.observable('');
@@ -77,6 +60,7 @@ function changePasswordViewModel() {
 
 function onSubmitClick() {
     if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
+        //
         changePassword.globalError = '';
         globalError(changePassword.globalError);
 
