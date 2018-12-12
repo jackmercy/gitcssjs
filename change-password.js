@@ -116,7 +116,7 @@ function handleResponseError(res) {
     var body = res.body;
 
 
-    if (!body || (typeof body === 'undefined' ? 'undefined' : _typeof(body)) !== 'object') {
+    if (!body || (typeof body === 'undefined' ? 'undefined' : typeof(body)) !== 'object') {
         body = {};
     }
 
