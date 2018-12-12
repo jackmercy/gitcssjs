@@ -84,15 +84,22 @@ function onSubmitClick() {
         };
         console.log(data);
         //changePassword.request(data);
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status !== 200) {
-                globalError(changePassword.globalError);
-            } else {};
-        };
-        xhttp.open("POST", 'https://nani.eu.auth0.com/lo/reset' , true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(JSON.stringify(data));
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+        const request = Request(
+            'https://nani.eu.auth0.com/lo/reset',
+            {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: header
+            });
+
+        fetch(request).then(function (response) {
+            console.log(response);
+        }).catch(function (error, response) {
+            console.log(response);
+            console.log(error);
+        });
     }
 }
 
