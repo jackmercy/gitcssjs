@@ -70,7 +70,7 @@ function changePasswordViewModel() {
     confirmPasswordInput = ko.observable('');
     isConfirmPasswordError = ko.observable(false);
     isFormValidated = ko.observable(false);
-    globalError = ko.observable();
+    globalError = ko.observable('');
 
 };
 
@@ -83,12 +83,12 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
         console.log(data);
-        changePassword.request(data);
+        //changePassword.request(data);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status !== 200) {
                 globalError(changePassword.globalError);
-            }
+            } else {};
         };
         xhttp.open("POST", 'https://nani.eu.auth0.com/lo/reset' , true);
         xhttp.setRequestHeader("Content-type", "application/json");
