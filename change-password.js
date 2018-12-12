@@ -82,15 +82,21 @@ function onSubmitClick() {
             _csrf: changePassword.csrf_token,
             ticket: changePassword.ticket
         };
-        console.log(data);
+
+        const formData = new FormData();
+        Object.keys(data).forEach(function(key) {
+           formData.append(key, data['key']);
+        });
+
+        console.log(formData);
         //changePassword.request(data);
         const header = new Headers();
-        header.append('Content-Type', 'application/json');
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
         const request = new Request(
             'https://nani.eu.auth0.com/lo/reset',
             {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: formData,
                 headers: header
             });
 
