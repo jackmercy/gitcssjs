@@ -1,5 +1,5 @@
 'use strict';
-var request = superagent;
+var request = new superagent();
 
 var changePasswordBtn = document.getElementById('change-password-button');
 
@@ -91,13 +91,13 @@ function onSubmitClick() {
         changePassword.request(data);
         const header = new Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
-        const request = new Request(
+/*        const request = new Request(
             'https://nani.eu.auth0.com/lo/reset',
             {
                 method: 'POST',
                 body: string,
                 headers: header
-            });
+            });*/
 
         request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).then(function (res) {
             console.log(res);
