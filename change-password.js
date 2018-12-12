@@ -86,9 +86,10 @@ function onSubmitClick() {
         const formData = new FormData();
         Object.keys(data).forEach(function(key) {
            formData.append(key, data['key']);
+            console.log(formData);
         });
 
-        console.log(formData);
+
         changePassword.request(data);
         const header = new Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
