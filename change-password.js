@@ -77,6 +77,9 @@ function changePasswordViewModel() {
 
 function onSubmitClick() {
     if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
+        changePassword.globalError = '';
+        globalError(changePassword.globalError);
+
         var data = {
             newPassword: passwordInput(),
             confirmNewPassword: confirmPasswordInput(),
@@ -94,16 +97,7 @@ function onSubmitClick() {
 
 function handleSuccessfulRequest(res) {
     var shouldRedirect = res.body && typeof res.body.result_url === 'string';
-    this.auxiliaryPane = _react2.default.createElement(
-        _success_pane2.default,
-        null,
-        _react2.default.createElement(
-            'p',
-            null,
-            changePassword.t('successMessage')
-        )
-    );
-
+    globalError(changePassword.globalError);
     changePassword.isSubmitting = false;
 
     if (shouldRedirect) {
@@ -135,10 +129,12 @@ function handleResponseError(res) {
     };
 
     changePassword.globalError = changePassword.t(passwordErrors[body.name] || body.code || 'serverError');
+    globalError(changePassword.globalError);
 };
 
 function handleNetworkError(err) {
     changePassword.globalError = changePassword.t(err.timeout ? 'timeoutError' : 'networkError');
+    globalError(changePassword.globalError);
 };
 
 function transformRequest(obj) {
