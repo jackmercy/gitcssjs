@@ -137,7 +137,7 @@ function onChangePasswordValue(input, isError, errorText) {
     } else if(input().length > 0 && input().length < 8) {
         isError(true);
         isFormValidated(false);
-        passwordErrorText.innerHTML = CHANGE_PASSWORD.LENGTH_8_ERROR;
+        passwordErrorText.innerHTML = GENERAL.LENGTH_8_ERROR;
     } else {
         isError(false);
         passwordErrorText.innerHTML = '';
@@ -156,7 +156,7 @@ function doesPasswordMatch() {
     if (passwordInput() !== confirmPasswordInput() ) {
         isConfirmPasswordError(true);
         isFormValidated(false);
-        confirmPasswordError.innerHTML = CHANGE_PASSWORD.PASSWORD_NOT_MATCH_ERROR;
+        confirmPasswordError.innerHTML = GENERAL.PASSWORD_NOT_MATCH_ERROR;
     } else {
         isConfirmPasswordError(false);
         isFormValidated(true);
