@@ -86,7 +86,7 @@ function onSubmitClick() {
         //changePassword.request(data);
         const header = new Headers();
         header.append('Content-Type', 'application/json');
-        const request = Request(
+        const request = new Request(
             'https://nani.eu.auth0.com/lo/reset',
             {
                 method: 'POST',
