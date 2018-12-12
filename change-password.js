@@ -83,11 +83,8 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        var formData = new FormData();
-        Object.keys(data).forEach(function(key) {
-           formData.append(key, data[key]);
-            console.log(formData);
-        });
+        var string = transformRequest(data);
+        console.log(string);
 
 
         changePassword.request(data);
@@ -97,7 +94,7 @@ function onSubmitClick() {
             'https://nani.eu.auth0.com/lo/reset',
             {
                 method: 'POST',
-                body: formData,
+                body: string,
                 headers: header
             });
 
@@ -108,6 +105,13 @@ function onSubmitClick() {
             console.log(error);
         });
     }
+}
+
+function transformRequest(obj) {
+    var str = [];
+    for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    return str.join("&");
 }
 
 function onChangePasswordValue(input, isError, errorText) {
