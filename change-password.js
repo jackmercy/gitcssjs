@@ -24,8 +24,8 @@ var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
-var isChangePassword;
-var globalError, isSuccess;
+var isChangePassword, isSuccess, isSubmitting;
+var globalError;
 
 
 document.getElementById("change-password-widget-container").style.display= "none";
@@ -59,6 +59,7 @@ function changePasswordViewModel() {
     globalError = ko.observable('');
     isChangePassword = ko.observable(false);
     isSuccess = ko.observable(getQueryStringValue('isChangePassword') || false);
+    isSubmitting = ko.observable(false);
 
 };
 
@@ -79,6 +80,7 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
+        isSubmitting(true);
         request.post('/lo/reset').type('form').send(data).timeout(6000).end(function (err, res) {
             if (err) { handleFailedRequest(err, res); }
             else { handleSuccessfulRequest(res); }
@@ -91,6 +93,7 @@ function handleSuccessfulRequest(res) {
     globalError(changePassword.globalError);
     changePassword.isSubmitting = false;
     isSuccess(true);
+    isSubmitting(false);
 
     if (shouldRedirect) {
         setTimeout(function () {
@@ -102,6 +105,7 @@ function handleSuccessfulRequest(res) {
 };
 
 function handleFailedRequest(err, res) {
+    isSubmitting(false);
     res ? handleResponseError(res) : handleNetworkError(err);
 };
 
