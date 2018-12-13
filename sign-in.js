@@ -129,7 +129,7 @@ ko.applyBindings( _signInViewModel );
 var params = Object.assign({
     domain: 'nani.eu.auth0.com',
     clientID: 'DGq0t6mLXz2mIAAKR1GvQHTYybwnaA6X',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: 'http://localhost:4200',
     responseType: 'code'
 });
 
