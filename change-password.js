@@ -24,6 +24,7 @@ var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
+var isChangePassword;
 var globalError, isSuccess;
 
 
@@ -60,6 +61,12 @@ function changePasswordViewModel() {
     isSuccess = ko.observable(false);
 
 };
+
+isChangePassword(getQueryStringValue('isChangePassword') || false);
+
+function getQueryStringValue (key) {
+    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
 
 function onSubmitClick() {
     if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
