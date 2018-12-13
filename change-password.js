@@ -74,7 +74,7 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        request.post('reset').type('form').send(data).timeout(6000).end(function (err, res) {
+        request.post('/adfafdsf').type('form').send(data).timeout(6000).end(function (err, res) {
             if (err) { handleFailedRequest(err, res); }
             else { handleSuccessfulRequest(res); }
         });
