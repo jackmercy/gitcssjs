@@ -180,7 +180,7 @@ function displaySuccess(message) {
 function displayError(err) {
     notificationMessage.innerHTML = '';
     notificationSuccess.innerHTML = '';
-    notificationErr.innerHTML = err.description;
+    notificationErr.innerHTML = err.error_description;
 }
 
 function onForgotPasswordLinkClicked() {
