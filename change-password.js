@@ -74,7 +74,7 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        request.post('/lo/reset').type('form').send(data).timeout(6000).end(function (err, res) {
+        request.post('reset').type('form').send(data).timeout(6000).end(function (err, res) {
             if (err) { handleFailedRequest(err, res); }
             else { handleSuccessfulRequest(res); }
         });
@@ -89,7 +89,7 @@ function handleSuccessfulRequest(res) {
 
     if (shouldRedirect) {
         setTimeout(function () {
-            redirect(res.body.result_url);
+            global.window.location.replace(res.body.result_url);
         }, changePassword.delayBeforeRedirect);
     } else if (changePassword.successCallback) {
         changePassword.successCallback();
