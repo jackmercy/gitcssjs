@@ -58,11 +58,9 @@ function changePasswordViewModel() {
     isFormValidated = ko.observable(false);
     globalError = ko.observable('');
     isChangePassword = ko.observable(false);
-    isSuccess = ko.observable(false);
+    isSuccess = ko.observable(getQueryStringValue('isChangePassword') || false);
 
 };
-
-isChangePassword(getQueryStringValue('isChangePassword') || false);
 
 function getQueryStringValue (key) {
     return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
