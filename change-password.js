@@ -24,8 +24,8 @@ var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
 var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
-var globalError;
-var isChangePassword;
+var globalError, isSuccess;
+
 
 document.getElementById("change-password-widget-container").style.display= "none";
 
@@ -34,7 +34,8 @@ function changePasswordViewModel() {
         NEW_PASSWORD: 'New password',
         CONFIRM_PASSWORD: 'Re-enter new password',
         LENGTH_8_ERROR: 'Password must be at least 8 characters',
-        PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match'
+        PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match',
+        SUCCESS_MESSAGE: 'You have successfully changed your password!'
     }
     CHANGE_PASSWORD = {
         TITLE: 'Change password',
@@ -56,6 +57,7 @@ function changePasswordViewModel() {
     isFormValidated = ko.observable(false);
     globalError = ko.observable('');
     isChangePassword = ko.observable(false);
+    isSuccess = ko.observable(false);
 
 };
 
@@ -72,9 +74,9 @@ function onSubmitClick() {
             ticket: changePassword.ticket
         };
 
-        request.post('https://nani.eu.auth0.com/lo/reset').type('form').send(data).timeout(6000).end(function (err, res) {
-            if (err) { handleFailedRequest(err, res) }
-            else { handleSuccessfulRequest(res) };
+        request.post('/lo/reset').type('form').send(data).timeout(6000).end(function (err, res) {
+            if (err) { handleFailedRequest(err, res); }
+            else { handleSuccessfulRequest(res); }
         });
     }
 }
@@ -83,6 +85,7 @@ function handleSuccessfulRequest(res) {
     var shouldRedirect = res.body && typeof res.body.result_url === 'string';
     globalError(changePassword.globalError);
     changePassword.isSubmitting = false;
+    isSuccess(true);
 
     if (shouldRedirect) {
         setTimeout(function () {
@@ -120,13 +123,6 @@ function handleNetworkError(err) {
     changePassword.globalError = changePassword.t(err.timeout ? 'timeoutError' : 'networkError');
     globalError(changePassword.globalError);
 };
-
-function transformRequest(obj) {
-    var str = [];
-    for(var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    return str.join("&");
-}
 
 function onChangePasswordValue(input, isError, errorText) {
     var passwordErrorText = document.getElementById(errorText);
