@@ -130,7 +130,7 @@ var params = Object.assign({
     domain: 'nani.eu.auth0.com',
     clientID: 'DGq0t6mLXz2mIAAKR1GvQHTYybwnaA6X',
     redirectUri: 'http://localhost:4200',
-    responseType: 'code'
+    responseType: 'token id_token'
 });
 
 var webAuth = new auth0.WebAuth(params);
@@ -143,7 +143,7 @@ function signInClicked(e) {
     var email = _signInViewModel.emailInput();
     var password = _signInViewModel.passwordInput();
 
-    webAuth.login({
+    webAuth.redirect.login({
         connection: databaseConnection,
         username: email,
         password: password
