@@ -143,7 +143,7 @@ function signInClicked(e) {
     var email = _signInViewModel.emailInput();
     var password = _signInViewModel.passwordInput();
 
-    webAuth.redirect.loginWithCredentials({
+    webAuth.login({
         connection: databaseConnection,
         username: email,
         password: password
