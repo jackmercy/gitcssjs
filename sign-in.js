@@ -144,7 +144,7 @@ function signInClicked(e) {
     var password = _signInViewModel.passwordInput();
 
     webAuth.login({
-        connection: databaseConnection,
+        realm: databaseConnection,
         username: email,
         password: password
     }, function(err) {
