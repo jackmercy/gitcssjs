@@ -126,14 +126,14 @@ ko.applyBindings( _signInViewModel );
 
 // Auth0
 
-var params = Object.assign({
+/*var params = Object.assign({
     domain: 'nani.eu.auth0.com',
     clientID: 'DGq0t6mLXz2mIAAKR1GvQHTYybwnaA6X',
     redirectUri: 'http://localhost:4200',
     responseType: 'token id_token'
-});
+});*/
 
-var webAuth = new auth0.WebAuth(params);
+//var webAuth = new auth0.WebAuth(params);
 var databaseConnection = 'Username-Password-Authentication';
 
 // login logic
