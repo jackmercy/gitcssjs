@@ -49,29 +49,29 @@ function validatePassword(pwd) {
 // Validator
 
 function _signInViewModel() {
-    /* var self = this; */
+    var self = this;
 
     // Email
-    emailInput = ko.observable('');
-    showMandatoryEmailErrMessage = ko.observable(false),
-    isEmailValidated = ko.observable(false),
+    self.emailInput = ko.observable('');
+    self.showMandatoryEmailErrMessage = ko.observable(false),
+    self.isEmailValidated = ko.observable(false),
     // Password
-    passwordInput = ko.observable(''),
-    showMandatoryPasswordErrMessage = ko.observable(false),
-    isPasswordValidated = ko.observable(false),
+    self.passwordInput = ko.observable(''),
+    self.showMandatoryPasswordErrMessage = ko.observable(false),
+    self.isPasswordValidated = ko.observable(false),
     // Forgot email
-    forgotEmailInput = ko.observable(''),
-    showMandatoryForgotEmailErrMessage = ko.observable(false),
-    isForgotEmailValidated = ko.observable(false),
+    self.forgotEmailInput = ko.observable(''),
+    self.showMandatoryForgotEmailErrMessage = ko.observable(false),
+    self.isForgotEmailValidated = ko.observable(false),
 
     // page texts
-    pageTexts = ko.observable();
+    self.pageTexts = ko.observable();
 
     if (config.extraParams.ui_locales === "de") {
-        pageTexts(pageTexts_de);
+        self.pageTexts(pageTexts_de);
     } else {
         // default language
-        pageTexts(pageTexts_en);
+        self.pageTexts(pageTexts_en);
     }
 };
 
