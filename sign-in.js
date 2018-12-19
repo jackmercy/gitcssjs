@@ -207,4 +207,8 @@ var pageTexts = {
     FORGOT_HEADER: 'forgot password',
     SIGNIN_HEADER: 'SIGN IN'
 }
-
+if (config.config.extraParams.ui_locales === 'fr') {
+    pageTexts.SIGNIN_HEADER = 'FOLK YOU';
+} else {
+    pageTexts.SIGNIN_HEADER = 'SIGN IN';
+}
