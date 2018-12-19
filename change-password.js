@@ -134,7 +134,8 @@ function handleNetworkError(err) {
 };
 
 function onChangePasswordValue(input, isError, errorText) {
-    var passwordErrorText = document.getElementById(errorText);
+    console.log('called');
+/*    var passwordErrorText = document.getElementById(errorText);
     if (input().length === 0) {
         isError(false);
         passwordErrorText.innerHTML = '';
@@ -143,7 +144,7 @@ function onChangePasswordValue(input, isError, errorText) {
         isError(false);
         passwordErrorText.innerHTML = '';
         isFormValidated(true);
-    }
+    }*/
 }
 
 function doesPasswordMatch() {
