@@ -139,10 +139,6 @@ function onChangePasswordValue(input, isError, errorText) {
         isError(false);
         passwordErrorText.innerHTML = '';
         return;
-    } else if(input().length > 0 && input().length < 8) {
-        isError(true);
-        isFormValidated(false);
-        passwordErrorText.innerHTML = GENERAL.LENGTH_8_ERROR;
     } else {
         isError(false);
         passwordErrorText.innerHTML = '';
