@@ -207,7 +207,7 @@ var pageTexts = {
     FORGOT_HEADER: 'forgot password',
     SIGNIN_HEADER: 'SIGN IN'
 }
-if (config.config.extraParams.ui_locales === "fr") {
+if (config.extraParams.ui_locales === "fr") {
     headerText.innerHTML = 'FR LANGUAGE';
 } else {
     headerText.innerHTML = 'SIGN IN';
