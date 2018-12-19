@@ -1,5 +1,5 @@
 'use strict';
-
+window.onload = function() {
 // Login form
 var loginBtn = document.getElementById('login-button');
 
@@ -41,6 +41,7 @@ var pageTexts = {
         FORGOT_NOTIFICATION_INTRO: '',
     }
 };
+
 function _signInViewModel() {
     var self = this;
 
@@ -208,3 +209,5 @@ document.getElementById('sign-in-button').addEventListener('click', signInClicke
 document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
 
 ko.applyBindings(new _signInViewModel());
+
+}
