@@ -133,9 +133,9 @@ function handleNetworkError(err) {
     globalError(changePassword.globalError);
 };
 
-function onChangePasswordValue(input, isError, errorText) {
-    console.log('called');
-/*    var passwordErrorText = document.getElementById(errorText);
+function onChangePasswordValue(input, inputEl, isError, errorText) {
+    var passwordErrorText = document.getElementById(errorText);
+    var inputParent = document.getElementById(inputEl).parentElement;
     if (input().length === 0) {
         isError(false);
         passwordErrorText.innerHTML = '';
@@ -144,8 +144,18 @@ function onChangePasswordValue(input, isError, errorText) {
         isError(false);
         passwordErrorText.innerHTML = '';
         isFormValidated(true);
-    }*/
+    }
+    // Add css
+    inputParent.classList.remove("success");
+    inputParent.classList.remove("error");
+    if (input().length > 0 && !isError()) {
+        inputParent.classList.add("success");
+    } else if (input().length > 0 && isError()) {
+        inputParent.classList.add("error");
+    }
 }
+
+
 
 function doesPasswordMatch() {
     if (passwordInput().length <= 0 || confirmPasswordInput() <= 0) {
