@@ -146,8 +146,6 @@ function onChangePasswordValue(input, inputEl, isError, errorText) {
         isFormValidated(true);
     }
     // Add css
-    inputParent.classList.remove("success");
-    inputParent.classList.remove("error");
     if (input().length > 0 && !isError()) {
         inputParent.classList.add("success");
     } else if (input().length > 0 && isError()) {
@@ -155,6 +153,10 @@ function onChangePasswordValue(input, inputEl, isError, errorText) {
     }
 }
 
+function onFocus(inputEl) {
+    inputParent.classList.remove("success");
+    inputParent.classList.remove("error");
+}
 
 
 function doesPasswordMatch() {
