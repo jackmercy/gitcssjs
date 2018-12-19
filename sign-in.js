@@ -5,7 +5,6 @@ var loginBtn = document.getElementById('login-button');
 
 var _emailInput = document.getElementById('email');
 
-
 var _passwordInput = document.getElementById('password');
 var passwordErrorText = document.getElementById('password-err-text');
 
@@ -21,33 +20,27 @@ var forgotPasswordContainer = document.getElementById('forgot-password-container
 forgotPasswordContainer.style.display = 'none';
 
 // validator 8 chars: .{8,} expr: ^(?=[a-zA-Z0-9#@$?]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*
-function hasNumber(input) {
-    return /\d/.test(input);
-}
-
-function hasLetters(input) {
-    return /[^0-9]/.test(input);
-}
-
-function hasLowerCase(str) {
-    return (/[a-z]/.test(str));
-}
-
-function hasUpperCase(str) {
-    return (/[A-Z]/.test(str));
-}
-
 function validateEmail(email) {
     var expr = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     return expr.test(String(email).toLowerCase());
 }
-
-function validatePassword(pwd) {
-    var expr = /.{8,}/;
-    return expr.test(String(pwd));
-}
 // Validator
-
+var pageTexts = {
+    TITLE: {
+        SIGN_IN: '',
+        FORGOT_PASSWORD: ''
+    },
+    SUCCESS: {
+        EMAIL_SENT: ''
+    },
+    ERROR: {
+        INVALID_EMAIL: '',
+        PASSWORD_LENGTH: '',
+    },
+    NOTIFICATION: {
+        FORGOT_NOTIFICATION_INTRO: '',
+    }
+};
 function _signInViewModel() {
     var self = this;
 
@@ -119,7 +112,7 @@ function onChangeEmailValue(input, showMandatoryErrMessage, isValidated, errElem
     } else if (!validateEmail(input())) {
         showMandatoryErrMessage(false);
         isValidated(false);
-        emailErrorText.innerHTML = pageTexts.INVALID_EMAIL;
+        emailErrorText.innerHTML = pageTexts.ERROR.INVALID_EMAIL;
     } else if (validateEmail(input())) {
         emailErrorText.innerHTML = '';
         showMandatoryErrMessage(false);
@@ -135,7 +128,7 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     } else if(input().length > 0 && input().length < 8) {
         showMandatoryErrMessage(false);
         isValidated(false);
-        passwordErrorText.innerHTML = pageTexts.PASSWORD_LENGTH;
+        passwordErrorText.innerHTML = pageTexts.ERROR.PASSWORD_LENGTH;
     } else {
         showMandatoryErrMessage(false);
         isValidated(true);
@@ -179,7 +172,7 @@ function forgotPassword(e) {
             forgotPasswordContainer.style.display = 'none';
             signInContainer.style.display = 'block';
             displaySuccess(resp);
-            headerText.innerHTML = pageTexts.SIGNIN_HEADER;
+            headerText.innerHTML = pageTexts.TITLE.SIGN_IN;
         }
         });
     }
@@ -203,8 +196,8 @@ function displayError(err) {
 function onForgotPasswordLinkClicked() {
     signInContainer.style.display = 'none';
     forgotPasswordContainer.style.display = 'block';
-    headerText.innerHTML = pageTexts.FORGOT_HEADER;
-    notificationMessage.innerHTML = pageTexts.FORGOT_NOTIFICATION_INTRO;
+    headerText.innerHTML = pageTexts.TITLE.FORGOT_PASSWORD;
+    notificationMessage.innerHTML = pageTexts.NOTIFICATION.FORGOT_NOTIFICATION_INTRO;
     notificationSuccess.innerHTML = '';
     notificationErr.innerHTML = '';
 }
