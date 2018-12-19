@@ -131,7 +131,7 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     }
 }
 
-ko.applyBindings(new _signInViewModel());
+ko.applyBindings(new _signInViewModel(), document.getElementById("html"));
 
 // Auth0
 
