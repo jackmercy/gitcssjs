@@ -49,7 +49,7 @@ function validatePassword(pwd) {
 // Validator
 
 function _signInViewModel() {
-    var self = this;
+    /* var self = this; */
 
     // Email
     emailInput = ko.observable('');
@@ -65,15 +65,16 @@ function _signInViewModel() {
     isForgotEmailValidated = ko.observable(false),
 
     // page texts
-    self.pageTexts = ko.observable();
+    pageTexts = ko.observable();
 
     if (config.extraParams.ui_locales === "de") {
-        self.pageTexts(pageTexts_de);
+        pageTexts(pageTexts_de);
     } else {
         // default language
-        self.pageTexts(pageTexts_en);
+        pageTexts(pageTexts_en);
     }
 };
+
 
 var pageTexts_en = {
     TITLE: {
@@ -131,7 +132,7 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     }
 }
 
-ko.applyBindings(new _signInViewModel(), document.getElementById("html"));
+ko.applyBindings(new _signInViewModel());
 
 // Auth0
 
