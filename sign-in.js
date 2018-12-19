@@ -80,21 +80,32 @@ var pageTexts_en = {
         SIGN_IN: 'SIGN IN',
         FORGOT_PASSWORD: 'forgot password'
     },
-    INVALID_EMAIL: 'Invalid Email address',
-    PASSWORD_LENGTH: 'Password must be at least 8 characters',
-    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
-    FORGOT_HEADER: 'forgot password',
-    SIGNIN_HEADER: 'SIGN IN'
+    SUCCESS: {
+        EMAIL_SENT: ''
+    },
+    ERROR: {
+        INVALID_EMAIL: 'Invalid Email address',
+        PASSWORD_LENGTH: 'Password must be at least 8 characters',
+    },
+    NOTIFICATION: {
+        FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
+    }
 };
 var pageTexts_de = {
     TITLE: {
-        SIGN_IN: 'SIGN IN(de)'
+        SIGN_IN: 'SIGN IN(de)',
+        FORGOT_PASSWORD: 'forgot password(de)'
     },
-    INVALID_EMAIL: 'Invalid Email address',
-    PASSWORD_LENGTH: 'Password must be at least 8 characters',
-    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
-    FORGOT_HEADER: 'forgot password',
-    SIGNIN_HEADER: 'SIGN IN'
+    SUCCESS: {
+        EMAIL_SENT: ''
+    },
+    ERROR: {
+        INVALID_EMAIL: 'Invalid Email address',
+        PASSWORD_LENGTH: 'Password must be at least 8 characters',
+    },
+    NOTIFICATION: {
+        FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
+    }
 };
 
 
@@ -198,9 +209,9 @@ function onForgotPasswordLinkClicked() {
     notificationErr.innerHTML = '';
 }
 
-ko.applyBindings(new _signInViewModel());
+
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
 document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
 
-
+ko.applyBindings(new _signInViewModel());
