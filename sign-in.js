@@ -75,10 +75,10 @@ function _signInViewModel() {
     }
 };
 
-
 var pageTexts_en = {
     TITLE: {
-        SIGN_IN: 'SIGN IN'
+        SIGN_IN: 'SIGN IN',
+        FORGOT_PASSWORD: 'forgot password'
     },
     INVALID_EMAIL: 'Invalid Email address',
     PASSWORD_LENGTH: 'Password must be at least 8 characters',
@@ -132,7 +132,7 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     }
 }
 
-ko.applyBindings(new _signInViewModel());
+
 
 // Auth0
 
@@ -197,6 +197,8 @@ function onForgotPasswordLinkClicked() {
     notificationSuccess.innerHTML = '';
     notificationErr.innerHTML = '';
 }
+
+ko.applyBindings(new _signInViewModel());
 
 document.getElementById('sign-in-button').addEventListener('click', signInClicked);
 document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
