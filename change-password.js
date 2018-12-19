@@ -154,6 +154,7 @@ function onChangePasswordValue(input, inputEl, isError, errorText) {
 }
 
 function onFocus(inputEl) {
+    var inputParent = document.getElementById(inputEl).parentElement;
     inputParent.classList.remove("success");
     inputParent.classList.remove("error");
 }
