@@ -180,7 +180,11 @@ function displaySuccess(message) {
 function displayError(err) {
     notificationMessage.innerHTML = '';
     notificationSuccess.innerHTML = '';
-    notificationErr.innerHTML = err.error_description;
+    if (err.error_description) {
+        notificationErr.innerHTML = err.error_description;
+    } else if (err.description) {
+        notificationErr.innerHTML = err.description;
+    }
 }
 
 function onForgotPasswordLinkClicked() {
