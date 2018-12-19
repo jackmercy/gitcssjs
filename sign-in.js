@@ -48,22 +48,55 @@ function validatePassword(pwd) {
 }
 // Validator
 
+var _signInViewModel = function () {
+    var self = this;
 
-
-var _signInViewModel = {
     // Email
-    emailInput: ko.observable(''),
-    showMandatoryEmailErrMessage: ko.observable(false),
-    isEmailValidated: ko.observable(false),
+    emailInput = ko.observable('');
+    showMandatoryEmailErrMessage = ko.observable(false),
+    isEmailValidated = ko.observable(false),
     // Password
-    passwordInput: ko.observable(''),
-    showMandatoryPasswordErrMessage: ko.observable(false),
-    isPasswordValidated: ko.observable(false),
+    passwordInput = ko.observable(''),
+    showMandatoryPasswordErrMessage = ko.observable(false),
+    isPasswordValidated = ko.observable(false),
     // Forgot email
-    forgotEmailInput: ko.observable(''),
-    showMandatoryForgotEmailErrMessage: ko.observable(false),
-    isForgotEmailValidated: ko.observable(false),
+    forgotEmailInput = ko.observable(''),
+    showMandatoryForgotEmailErrMessage = ko.observable(false),
+    isForgotEmailValidated = ko.observable(false),
+
+    // page texts
+    self.pageTexts = ko.observable();
+
+    if (config.extraParams.ui_locales === "de") {
+        self.pageTexts(pageTexts_de);
+    } else {
+        // default language
+        self.pageTexts(pageTexts_en);
+    }
 };
+
+var pageTexts_en = {
+    TITLE: {
+        SIGN_IN: 'SIGN IN'
+    },
+    INVALID_EMAIL: 'Invalid Email address',
+    PASSWORD_LENGTH: 'Password must be at least 8 characters',
+    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
+    FORGOT_HEADER: 'forgot password',
+    SIGNIN_HEADER: 'SIGN IN'
+};
+var pageTexts_de = {
+    TITLE: {
+        SIGN_IN: 'SIGN IN(de)'
+    },
+    INVALID_EMAIL: 'Invalid Email address',
+    PASSWORD_LENGTH: 'Password must be at least 8 characters',
+    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
+    FORGOT_HEADER: 'forgot password',
+    SIGNIN_HEADER: 'SIGN IN'
+};
+
+
 
 function onChangeEmailValue(input, showMandatoryErrMessage, isValidated, errElement) {
     var emailErrorText = document.getElementById(errElement);
@@ -82,30 +115,6 @@ function onChangeEmailValue(input, showMandatoryErrMessage, isValidated, errElem
     }
 }
 
-// strict password: upper & lower case + number
-/* function onChangePasswordValue() {
-    if (_signInViewModel.passwordInput().length === 0) {
-        _signInViewModel.showMandatoryPasswordErrMessage(true);
-        return;
-    } else if(_signInViewModel.passwordInput().length > 0 && _signInViewModel.passwordInput().length < 8) {
-        _signInViewModel.showMandatoryPasswordErrMessage(false);
-        _signInViewModel.isPasswordValidated(false);
-        passwordErrorText.innerHTML = 'Password must be at least 8 characters';
-
-    } else if (!hasNumber(_signInViewModel.passwordInput()) ||
-            !hasLetters(_signInViewModel.passwordInput())   ||
-            !hasLowerCase(_signInViewModel.passwordInput()) ||
-            !hasUpperCase(_signInViewModel.passwordInput())) {
-        _signInViewModel.showMandatoryPasswordErrMessage(false);
-        _signInViewModel.isPasswordValidated(false);
-        passwordErrorText.innerHTML = 'Must contains number, lowercase and uppercase letters';
-    } else {
-        _signInViewModel.showMandatoryPasswordErrMessage(false);
-        passwordErrorText.innerHTML = '';
-        _signInViewModel.isPasswordValidated(true);
-    }
-} */
-
 // simple: > 8 chars
 function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     if (input().length === 0) {
@@ -122,26 +131,18 @@ function onChangePasswordValue(input, showMandatoryErrMessage, isValidated) {
     }
 }
 
-ko.applyBindings( _signInViewModel );
+ko.applyBindings(new _signInViewModel());
 
 // Auth0
 
-/*var params = Object.assign({
-    domain: 'nani.eu.auth0.com',
-    clientID: 'DGq0t6mLXz2mIAAKR1GvQHTYybwnaA6X',
-    redirectUri: 'http://localhost:4200',
-    responseType: 'token id_token'
-});*/
-
-//var webAuth = new auth0.WebAuth(params);
 var databaseConnection = 'Username-Password-Authentication';
 
 // login logic
 
 function signInClicked(e) {
     e.preventDefault();
-    var email = _signInViewModel.emailInput();
-    var password = _signInViewModel.passwordInput();
+    var email = emailInput();
+    var password = passwordInput();
 
     webAuth.login({
         realm: databaseConnection,
@@ -154,7 +155,7 @@ function signInClicked(e) {
 
 function forgotPassword(e) {
     e.preventDefault();
-    var _email = _signInViewModel.forgotEmailInput();
+    var _email = forgotEmailInput();
 
     webAuth.changePassword({
     connection: databaseConnection,
@@ -200,15 +201,3 @@ document.getElementById('sign-in-button').addEventListener('click', signInClicke
 document.getElementById('forgot-password-button').addEventListener('click', forgotPassword);
 
 
-var pageTexts = {
-    INVALID_EMAIL: 'Invalid Email address',
-    PASSWORD_LENGTH: 'Password must be at least 8 characters',
-    FORGOT_NOTIFICATION_INTRO: 'Please enter your email address. We will send you an email to reset your password.',
-    FORGOT_HEADER: 'forgot password',
-    SIGNIN_HEADER: 'SIGN IN'
-}
-if (config.extraParams.ui_locales === "fr") {
-    headerText.innerHTML = 'FR LANGUAGE';
-} else {
-    headerText.innerHTML = 'SIGN IN';
-}
