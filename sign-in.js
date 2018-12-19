@@ -48,7 +48,7 @@ function validatePassword(pwd) {
 }
 // Validator
 
-var _signInViewModel = function () {
+function _signInViewModel() {
     var self = this;
 
     // Email
