@@ -185,7 +185,7 @@ function handleNetworkError(err) {
 };
 
 function getError(key) {
-    return LANGUAGE.MESSAGE[key];
+    return LANGUAGE().MESSAGE[key];
 }
 
 function onBlur(input, inputEl, isError, errorText) {
