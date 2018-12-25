@@ -1,75 +1,126 @@
 'use strict';
 var request = superagent;
-
-var changePasswordBtn = document.getElementById('change-password-button');
-
-var _currentPasswordInput = document.getElementById('current-password');
-var currentPasswordError = document.getElementById('currentPassword-err');
-
-var _passwordInput = document.getElementById('password');
-var passwordError = document.getElementById('password-err');
-
-var _confirmPasswordInput = document.getElementById('confirm-password');
 var confirmPasswordError = document.getElementById('confirm-password-err');
-
-var notification = document.getElementById('notification-text');
-
 // enable validation
 
-var currentPasswordInput;
-var isCurrentPasswordError;
 var passwordInput;
 var isPasswordError;
 var confirmPasswordInput;
 var isConfirmPasswordError;
 var isFormValidated;
-var CHANGE_PASSWORD, RESET_PASSWORD, GENERAL;
+var LANGUAGE;
 var isChangePassword, isSuccess, isSubmitting;
 var globalError;
+var title;
 
-
-document.getElementById("change-password-widget-container").style.display= "none";
-
-function changePasswordViewModel() {
-    GENERAL = {
+// Language label
+var EN = {
+    GENERAL: {
         NEW_PASSWORD: 'New password',
         CONFIRM_PASSWORD: 'Re-enter new password',
         LENGTH_8_ERROR: 'Password must be at least 8 characters',
         PASSWORD_NOT_MATCH_ERROR: 'New password doesn\'t match',
         SUCCESS_MESSAGE: 'You have successfully changed your password!'
-    }
-    CHANGE_PASSWORD = {
+    },
+    CHANGE_PASSWORD: {
         TITLE: 'Change password',
         BUTTON: 'Change password',
         PAGE_TITLE: 'BEC Change Password'
-    };
-    RESET_PASSWORD = {
+    },
+    RESET_PASSWORD: {
         TITLE: 'Reset password',
         BUTTON: 'Reset password',
         PAGE_TITLE: 'BEC Reset Password'
-    };
+    },
+    MESSAGE: {
+        passwordConfirmationMatchError: 'Please ensure the password and the confirmation are the same.',
+        configurationError: 'An error ocurred. There appears to be a misconfiguration in the form.',
+        networkError: 'The server cannot be reached, there is a problem with the network.',
+        timeoutError: 'The server cannot be reached, please try again.',
+        serverError: 'There was an error processing the password reset.',
+        weakPasswordError: 'Password is too weak.',
+        passwordHistoryError: 'Password has previously been used',
+        passwordDictError: 'Password is too common',
+        passwordNoUserInfoError: 'Password is based on user information'
+    }
+};
+var DE = {
+    GENERAL: {
+        NEW_PASSWORD: 'Neues Kennwort',
+        CONFIRM_PASSWORD: 'neues Passwort erneut eingeben',
+        LENGTH_8_ERROR: 'Das Passwort muss aus mindestens 8 Zeichen bestehen',
+        PASSWORD_NOT_MATCH_ERROR: 'Neues Passwort stimmt nicht überein',
+        SUCCESS_MESSAGE: 'Sie haben Ihr Passwort erfolgreich geändert!'
+    },
+    CHANGE_PASSWORD: {
+        TITLE: 'Ändere das Passwort',
+        BUTTON: 'Ändere das Passwort',
+        PAGE_TITLE: 'BEC Passwort ändern'
+    },
+    RESET_PASSWORD: {
+        TITLE: 'Passwort zurücksetzen',
+        BUTTON: 'Passwort zurücksetzen',
+        PAGE_TITLE: 'BEC Passwort zurücksetzen'
+    },
+    MESSAGE: {
+        passwordConfirmationMatchError: 'Zorg ervoor dat het wachtwoord en de bevestiging hetzelfde zijn.',
+        configurationError: 'Ein Fehler ist aufgetreten. Es scheint eine falsche Konfiguration im Formular zu geben',
+        networkError: 'Der Server ist nicht erreichbar, es liegt ein Problem mit dem Netzwerk vor.',
+        timeoutError: 'Der Server ist nicht erreichbar. Bitte versuchen Sie es erneut.',
+        serverError: 'Fehler beim Verarbeiten der Kennwortrücksetzung.',
+        weakPasswordError: 'Passwort ist zu schwach.',
+        passwordHistoryError: 'Das Passwort wurde zuvor verwendet.',
+        passwordDictError: 'Password is too common',
+        passwordNoUserInfoError: 'Das Passwort basiert auf Benutzerinformationen.'
+    }
+};
 
-    currentPasswordInput = ko.observable('');
-    isCurrentPasswordError = ko.observable(false);
+function changePasswordViewModel() {
     passwordInput = ko.observable('');
     isPasswordError = ko.observable(false);
     confirmPasswordInput = ko.observable('');
-    isConfirmPasswordError = ko.observable(false);
+    isConfirmPasswordError = ko.observable(true);
     isFormValidated = ko.observable(false);
     globalError = ko.observable('');
-    isChangePassword = ko.observable(false);
-    isSuccess = ko.observable(getQueryStringValue('isChangePassword') || false);
+    isSuccess = ko.observable(false);
+    isChangePassword= ko.observable(getQueryStringValue('isChangePassword') || false);
     isSubmitting = ko.observable(false);
+    LANGUAGE = ko.observable(EN);
+    title = ko.computed(function () {
+        return isChangePassword() ?
+            LANGUAGE().CHANGE_PASSWORD.PAGE_TITLE : LANGUAGE().RESET_PASSWORD.PAGE_TITLE;
+    });
+}
 
-};
+ko.applyBindings(new changePasswordViewModel(), document.getElementById('html') );
+
+document.getElementById('change-password-widget-container').style.display= 'none';
+initPageLanguage();
+
+function initPageLanguage() {
+    //Uncomment this for production
+    //var language = getQueryStringValue('language').toLowerCase();
+
+    var language = 'de'; //This is for development
+
+    if (language === 'en') {
+        LANGUAGE(EN);
+    }
+
+    if (language === 'de') {
+        LANGUAGE(DE);
+    }
+}
 
 function getQueryStringValue (key) {
-    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    return decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') +
+        '(?:\\=([^&]*))?)?.*$', 'i'), '$1'));
 }
 
 function onSubmitClick() {
-    if (isFormValidated() && passwordInput().length > 0 && confirmPasswordInput().length  > 0 ) {
-        //
+    if (isFormValidated() && passwordInput().length > 0
+        && confirmPasswordInput().length > 0 && !isSubmitting() ) {
+
         changePassword.globalError = '';
         globalError(changePassword.globalError);
 
@@ -124,46 +175,45 @@ function handleResponseError(res) {
         PasswordNoUserInfoError: 'passwordNoUserInfoError'
     };
 
-    changePassword.globalError = changePassword.t(passwordErrors[body.name] || body.code || 'serverError');
+    changePassword.globalError = getError(passwordErrors[body.name] || body.code || 'serverError');
     globalError(changePassword.globalError);
 };
 
 function handleNetworkError(err) {
-    changePassword.globalError = changePassword.t(err.timeout ? 'timeoutError' : 'networkError');
+    changePassword.globalError = getError(err.timeout ? 'timeoutError' : 'networkError');
     globalError(changePassword.globalError);
 };
 
-function onChangePasswordValue(input, inputEl, isError, errorText) {
+function getError(key) {
+    return LANGUAGE.MESSAGE[key];
+}
+
+function onBlur(input, inputEl, isError, errorText) {
+    doesPasswordMatch();
     var passwordErrorText = document.getElementById(errorText);
     var inputParent = document.getElementById(inputEl).parentElement;
-    if (input().length === 0) {
-        isError(false);
-        passwordErrorText.innerHTML = '';
-        return;
-    } else {
-        isError(false);
-        passwordErrorText.innerHTML = '';
-        isFormValidated(true);
-    }
+
     // Add css
     if (input().length > 0 && !isError()) {
-        inputParent.classList.add("success");
+        inputParent.classList.add('success');
     } else if (input().length > 0 && isError()) {
-        inputParent.classList.add("error");
+        inputParent.classList.add('error');
     }
 }
 
 function onFocus(inputEl) {
     var inputParent = document.getElementById(inputEl).parentElement;
-    inputParent.classList.remove("success");
-    inputParent.classList.remove("error");
+    var inputError = document.getElementById(inputEl + '-err');
+    inputError.innerHTML = '';
+    inputParent.classList.remove('success');
+    inputParent.classList.remove('error');
 }
 
-
 function doesPasswordMatch() {
-    if (passwordInput().length <= 0 || confirmPasswordInput() <= 0) {
+    var inputParent = document.getElementById('confirm-password').parentElement;
+
+    if (passwordInput().length <= 0 || confirmPasswordInput().length <= 0) {
         isConfirmPasswordError(false);
-        isFormValidated(true);
         confirmPasswordError.innerHTML = '';
         return;
     }
@@ -171,12 +221,13 @@ function doesPasswordMatch() {
     if (passwordInput() !== confirmPasswordInput() ) {
         isConfirmPasswordError(true);
         isFormValidated(false);
-        confirmPasswordError.innerHTML = GENERAL.PASSWORD_NOT_MATCH_ERROR;
+        inputParent.classList.add('error');
+        document.getElementById('confirm-password-err').innerHTML = LANGUAGE().GENERAL.PASSWORD_NOT_MATCH_ERROR;
     } else {
         isConfirmPasswordError(false);
         isFormValidated(true);
-        confirmPasswordError.innerHTML = '';
+        inputParent.classList.remove('error');
+        inputParent.classList.add('success');
+        document.getElementById('confirm-password-err').innerHTML = '';
     }
 }
-
-ko.applyBindings(new changePasswordViewModel(), document.getElementById("html") );
